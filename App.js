@@ -6,18 +6,19 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import ArrowSVG from './src/assets/SVG/Arrow';
+import CounterBadgeSVG from './src/assets/SVG/CounterBage';
 import FilterSVG from './src/assets/SVG/Filter';
 import MenuSVG from './src/assets/SVG/Menu';
+import MoreSVG from './src/assets/SVG/More';
+import PlusSVG from './src/assets/SVG/Plus';
 import SearchSVG from './src/assets/SVG/Search';
 
 const App = () => {
-  const arr = [
-    {uri: require('./src/assets/images/Img1.png')},
-    {uri: require('./src/assets/images/Img2.png')},
-    {uri: require('./src/assets/images/Img3.png')},
+  const arrTopCards = [
     {uri: require('./src/assets/images/Img1.png')},
     {uri: require('./src/assets/images/Img2.png')},
     {uri: require('./src/assets/images/Img3.png')},
@@ -26,14 +27,69 @@ const App = () => {
     {uri: require('./src/assets/images/Img3.png')},
   ];
 
+  const arrBottomCards = [
+    {
+      data: {
+        name: 'Леонид Стоцкий',
+        city: 'Санкт-Петербург',
+        age: 26,
+      },
+      uri: require('./src/assets/images/user_photo1.png'),
+    },
+    {
+      data: {
+        name: 'Максим Феликс',
+        city: 'Москва',
+        age: 26,
+      },
+      uri: require('./src/assets/images/user_photo2.png'),
+    },
+    {
+      data: {
+        name: 'Леонид Стоцкий',
+        city: 'Санкт-Петербург',
+        age: 26,
+      },
+      uri: require('./src/assets/images/user_photo1.png'),
+    },
+    ,
+    {
+      data: {
+        name: 'Максим Феликс',
+        city: 'Москва',
+        age: 26,
+      },
+      uri: require('./src/assets/images/user_photo2.png'),
+    },
+    ,
+    {
+      data: {
+        name: 'Леонид Стоцкий',
+        city: 'Санкт-Петербург',
+        age: 26,
+      },
+      uri: require('./src/assets/images/user_photo1.png'),
+    },
+    ,
+    {
+      data: {
+        name: 'Максим Феликс',
+        city: 'Москва',
+        age: 26,
+      },
+      uri: require('./src/assets/images/user_photo2.png'),
+    },
+    ,
+  ];
+
   const TopCards = () => {
     return (
       <ScrollView
-        pagingEnabled
+        style={{width: '100%', height: '11%'}}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{justifyContent: 'space-evenly'}}
         horizontal>
-        {arr.map(item => (
+        {arrTopCards.map(item => (
           <View
             style={{
               borderRadius: 12,
@@ -42,7 +98,84 @@ const App = () => {
               marginHorizontal: 5,
             }}>
             <Image source={item.uri} />
-            {console.log(item)}
+          </View>
+        ))}
+      </ScrollView>
+    );
+  };
+
+  const BottomCards = () => {
+    return (
+      <ScrollView
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={
+          {
+            // backgroundColor: 'blue',
+          }
+        }
+        horizontal>
+        {arrBottomCards.map(item => (
+          <View
+            style={{
+              alignItems: 'center',
+              borderRadius: 30,
+              marginHorizontal: 5,
+              // backgroundColor: 'pink',
+              width: 180,
+            }}>
+            <Image
+              style={{borderTopLeftRadius: 12, borderTopRightRadius: 12}}
+              source={item?.uri}
+            />
+            <View
+              style={{
+                paddingHorizontal: 10,
+                height: 100,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+                flexDirection: 'row',
+              }}>
+              <View>
+                <View>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontFamily: 'Circe-Bold',
+                      marginTop: 5,
+                      color: '#212121',
+                    }}>
+                    {item?.data?.name}
+                  </Text>
+                  <Text style={{fontFamily: 'Circe-Bold', color: 'gray'}}>
+                    Город
+                  </Text>
+                  <Text
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                    style={{fontFamily: 'CRC55', color: '#212121'}}>
+                    {item.data.city}
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderLeftColor: 'gray',
+                  borderLeftWidth: 1,
+                  height: 40,
+                  marginTop: 30,
+                  width: '16%',
+                  alignItems: 'center',
+                }}>
+                <Text style={{fontFamily: 'Circe-Bold', color: 'gray'}}>
+                  Лет
+                </Text>
+                <Text style={{fontFamily: 'CRC55', color: '#212121'}}>
+                  {item.data.age}
+                </Text>
+              </View>
+            </View>
           </View>
         ))}
       </ScrollView>
@@ -53,9 +186,8 @@ const App = () => {
     return (
       <View
         style={{
-          paddingHorizontal: 25,
-          // backgroundColor: 'pink',
-          height: '10%',
+          paddingHorizontal: 20,
+          height: 80,
           justifyContent: 'center',
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -69,7 +201,7 @@ const App = () => {
             <Text
               style={{
                 fontSize: 19,
-                fontFamily: 'CRC55',
+                fontFamily: 'Circe-Bold',
                 color: '#212121',
                 marginRight: 5,
               }}>
@@ -84,22 +216,60 @@ const App = () => {
         <View
           style={{
             flexDirection: 'row',
-            // backgroundColor: 'blue',
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <SearchSVG />
-          <FilterSVG />
-          <MenuSVG />
+          <TouchableOpacity>
+            <SearchSVG />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <FilterSVG />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <MenuSVG />
+          </TouchableOpacity>
         </View>
       </View>
     );
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: '#F5F5F5'}}>
+    <View
+      style={{
+        backgroundColor: '#F5F5F5',
+      }}>
       <Header />
       <TopCards />
+      <View
+        style={{
+          paddingHorizontal: 20,
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
+        <Text
+          style={{
+            fontSize: 19,
+            fontFamily: 'Circe-Bold',
+            color: '#212121',
+            marginRight: 5,
+            marginVertical: 20,
+          }}>
+          Старший брат
+        </Text>
+        <CounterBadgeSVG />
+        <View style={{width: '40%'}}></View>
+        <View
+          style={{
+            alignItems: 'flex-end',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            width: 70,
+          }}>
+          <PlusSVG />
+          <MoreSVG />
+        </View>
+      </View>
+      <BottomCards />
     </View>
   );
 };
